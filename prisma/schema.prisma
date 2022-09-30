@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+type RevenuesSecao {
+  conteudo String[]
+  nome     String
+}
+
+model categories {
+  id       String     @id @default(auto()) @map("_id") @db.ObjectId
+  name     String
+  revenues revenues[]
+}
+
+model favorites {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  user      users    @relation(fields: [userId], references: [id])
+  revenueId String   @db.ObjectId
+  revenues  revenues @relation(fields: [revenueId], references: [id])
+}
+
+model revenues {
+  id         String          @id @default(auto()) @map("_id") @db.ObjectId
+  categoryId String          @db.ObjectId
+  categories categories      @relation(fields: [categoryId], references: [id])
+  nome       String
+  secao      RevenuesSecao[]
+  userId     String          @db.ObjectId
+  user       users           @relation(fields: [userId], references: [id])
+  favorites  favorites[]
+  images     String[]
+}
+
+model users {
+  id        String      @id @default(auto()) @map("_id") @db.ObjectId
+  email     String
+  name      String
+  password  String
+  favorites favorites[]
+  revenues  revenues[]
+}
