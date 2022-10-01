@@ -7,16 +7,17 @@ export function authMiddleware(
   next: NextFunction
 ) {
   const { authorization } = req.headers;
-  if (!req.headers) {
+  const token = authorization?.replace("Bearer ", "");
+  if (!token) { 
     return res.status(401).send("Acesso não autorizado.");
   }
-  const token = authorization?.replace("Bearer ", "");
-  const secret_key = process.env.SECRET_KEY;
+  console.log(token)
+  const secret_key = process.env.JWT_SECRET;
   const user = jwt.verify(token, secret_key);
   if (!!user && !!token) {
     res.locals.user = user;
     next();
-  } else {
+  } else {  
     res.status(404).send("Error ao validar o usuário");
   }
 }
