@@ -10,4 +10,4 @@ app.use(cors());
 app.use(router);
 app.use(errorHandlingMiddleware);
 
-export default app;
+module.exports = app;
