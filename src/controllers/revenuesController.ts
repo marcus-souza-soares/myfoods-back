@@ -10,3 +10,8 @@ export async function getRevenuesByCategoryId(req: Request, res: Response) {
   const revenues = await revenueService.getByCategoryId(id);
   res.send(revenues);
 }
+export async function getFavorites(req: Request, res: Response) {
+  const user = res.locals.user;
+  const revenues = await revenueService.getFavorites(user.id);
+  return res.send(revenues);
+}

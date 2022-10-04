@@ -1,5 +1,4 @@
 import { prisma } from "../databases/prismaCliente.js";
-import { ObjectId } from "bson";
 import { db } from "../databases/mongodb.js";
 
 export async function findAll() {
@@ -15,9 +14,10 @@ export async function findByUser(userId: string) {
 }
 
 export async function findByCategoryId(id: string) {
-  const result = await db
-  .collection("revenues")
-  .find({ categoryId: id })
-  .toArray();
+  const result = prisma.revenues.findMany({
+    where: {
+      categoryId: id,
+    },
+  });
   return result;
 }

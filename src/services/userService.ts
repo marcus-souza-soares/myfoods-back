@@ -19,8 +19,8 @@ export async function login(user: Login) {
   if (!find || !comparePassword(user.password, find.password))
     throw { code: "NotFound", message: "Verifique os campos novamente!" };
 
-  const token = buildToken(user);
   const { email, name, id } = find;
+  const token = buildToken(find);
   return {
     user: {
       email,
@@ -29,6 +29,9 @@ export async function login(user: Login) {
     },
     token,
   };
+}
+export async function getUserById(id: string) {
+  return await userRepository.findUserById(id);
 }
 
 function encriptPassword(pass: string) {
@@ -42,5 +45,9 @@ function comparePassword(pass: string, userPass: string) {
 function buildToken(user: Login) {
   const jwtKey = process.env.JWT_SECRET;
   const config = { expiresIn: process.env.EXPIRES_TOKEN || "1h" };
-  return jwt.sign(user, jwtKey, config);
+  try {
+    return jwt.sign(user, jwtKey, config);
+  } catch (error) {
+    return null;
+  }
 }

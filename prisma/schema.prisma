@@ -13,14 +13,14 @@ type RevenuesSecao {
 }
 
 model categories {
-  id       String     @id @default(auto()) @map("_id") @db.ObjectId
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
   name     String
-  revenues revenues?
+  revenues revenues[]
 }
 
 model revenues {
   id         String          @id @default(auto()) @map("_id") @db.ObjectId
-  categoryId String          @unique 
+  categoryId String          @db.ObjectId
   category   categories      @relation(fields: [categoryId], references: [id])
   nome       String
   secao      RevenuesSecao[]
@@ -44,4 +44,9 @@ model favorites {
   user      users    @relation(fields: [userId], references: [id])
   revenueId String   @db.ObjectId
   revenues  revenues @relation(fields: [revenueId], references: [id])
+}
+
+model teste {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
 }
