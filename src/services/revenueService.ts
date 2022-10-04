@@ -21,3 +21,9 @@ export async function getFavorites(userId: string) {
   if (!user) throw { code: "NotFound", message: "Ususário não encontrado " };
   return await favoriteService.getFavoriteRevenues(userId);
 }
+export async function getMyRevenues(userId: string) {
+  const user = await userService.getUserById(userId);
+  if (!user) throw { code: "NotFound", message: "Ususário não encontrado " };
+  return await revenueRepository.getMyRevenues(userId);
+}
+

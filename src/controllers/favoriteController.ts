@@ -18,7 +18,7 @@ export async function addFavorite(req: Request, res: Response) {
     revenueId: revenueId.toString(),
     userId: user.id,
   });
-  res.send("OK")
+  res.send("OK");
 }
 
 export async function removeFavorite(req: Request, res: Response) {
@@ -28,5 +28,5 @@ export async function removeFavorite(req: Request, res: Response) {
     revenueId: revenueId.toString(),
     userId: user.id,
   });
-  res.send("OK")
+  res.send("OK");
 }

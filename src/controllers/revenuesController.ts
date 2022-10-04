@@ -15,3 +15,9 @@ export async function getFavorites(req: Request, res: Response) {
   const revenues = await revenueService.getFavorites(user.id);
   return res.send(revenues);
 }
+
+export async function getMyRevenues(req: Request, res: Response) {
+  const user = res.locals.user;
+  const revenues = await revenueService.getMyRevenues(user.id);
+  return res.send(revenues);
+}

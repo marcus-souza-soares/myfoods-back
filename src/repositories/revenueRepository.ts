@@ -1,5 +1,4 @@
 import { prisma } from "../databases/prismaCliente.js";
-import { db } from "../databases/mongodb.js";
 
 export async function findAll() {
   return prisma.revenues.findMany();
@@ -20,4 +19,11 @@ export async function findByCategoryId(id: string) {
     },
   });
   return result;
+}
+export async function getMyRevenues(userId: string) {
+  return await prisma.revenues.findMany({
+    where: {
+      userId,
+    },
+  });
 }
