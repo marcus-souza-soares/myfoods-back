@@ -21,3 +21,9 @@ export async function getMyRevenues(req: Request, res: Response) {
   const revenues = await revenueService.getMyRevenues(user.id);
   return res.send(revenues);
 }
+
+export async function getById(req: Request, res: Response) {
+  const { revenueId } = req.params;
+  const revenue = await revenueService.getById(revenueId);
+  res.send(revenue);
+}

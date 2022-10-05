@@ -27,3 +27,8 @@ export async function getMyRevenues(userId: string) {
   return await revenueRepository.getMyRevenues(userId);
 }
 
+export async function getById(revenueId: string) {
+  const revenue = await revenueRepository.findById(revenueId);
+  if (!revenue) throw { code: "NotFound", message: "Receita não encontrada!" };
+  return revenue;
+}

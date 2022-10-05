@@ -27,3 +27,10 @@ export async function getMyRevenues(userId: string) {
     },
   });
 }
+export async function findById(id: string) {
+  return await prisma.revenues.findUnique({
+    where: {
+      id,
+    },
+  });
+}
