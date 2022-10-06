@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node src/index.ts",
+    "build": "tsc && npx prisma migrate deploy",
+    "start": "npm build && node dist/src/server.js",
     "dev": "nodemon src/index.ts",
     "test": "jest --no-cache"
   },
@@ -29,7 +30,6 @@
     "prisma": "^4.4.0"
   },
   "devDependencies": {
-    "@shelf/jest-mongodb": "^4.1.0",
     "@types/bcrypt": "^5.0.0",
     "@types/chalk": "^2.2.0",
     "@types/cors": "^2.8.12",
