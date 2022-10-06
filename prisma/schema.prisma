@@ -13,7 +13,7 @@ type RevenuesSecao {
 }
 
 model categories {
-  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  id       String     @id @default(auto()) @map("_id") @db.ObjectId
   name     String
   revenues revenues[]
 }
@@ -22,6 +22,7 @@ model revenues {
   id         String          @id @default(auto()) @map("_id") @db.ObjectId
   categoryId String          @db.ObjectId
   category   categories      @relation(fields: [categoryId], references: [id])
+  imageURL   String
   nome       String
   secao      RevenuesSecao[]
   userId     String          @db.ObjectId

@@ -1,4 +1,5 @@
 import { prisma } from "../databases/prismaCliente.js";
+import { Revenue } from "../types/revenueTypes.js";
 
 export async function findAll() {
   return prisma.revenues.findMany();
@@ -32,5 +33,15 @@ export async function findById(id: string) {
     where: {
       id,
     },
+  });
+}
+export async function getByData(data: Partial<Revenue>) {
+  return await prisma.revenues.findFirst({
+    where: data,
+  });
+}
+export async function create(data: Omit<Revenue, "id">) {
+  return await prisma.revenues.create({
+    data,
   });
 }

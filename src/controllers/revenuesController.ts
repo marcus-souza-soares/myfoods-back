@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import * as revenueService from "../services/revenueService.js";
 
+
 export async function getRevenues(req: Request, res: Response) {
   const revenues = await revenueService.getAll();
   res.send(revenues);
@@ -27,3 +28,9 @@ export async function getById(req: Request, res: Response) {
   const revenue = await revenueService.getById(revenueId);
   res.send(revenue);
 }
+export async function create(req: Request, res: Response){
+  const data = req.body;
+  await revenueService.create(data);
+  res.status(201).send("Cadastrou!")
+}
+

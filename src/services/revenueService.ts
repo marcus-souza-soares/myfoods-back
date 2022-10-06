@@ -2,6 +2,7 @@ import * as revenueRepository from "../repositories/revenueRepository.js";
 import * as categoryService from "../services/categoriesService.js";
 import * as userService from "./userService.js";
 import * as favoriteService from "./favoriteService.js";
+import { Revenue } from "../types/revenueTypes.js";
 
 export async function getAll() {
   return await revenueRepository.findAll();
@@ -31,4 +32,12 @@ export async function getById(revenueId: string) {
   const revenue = await revenueRepository.findById(revenueId);
   if (!revenue) throw { code: "NotFound", message: "Receita não encontrada!" };
   return revenue;
+}
+export async function create(data: Revenue) {
+  const find = await getRevenues(data);
+  if(!!find) throw {code: "NotAllowed", message: "Receita já cadastrada!"}
+  return await revenueRepository.create(data);
+}
+export async function getRevenues(data: Partial<Revenue>) {
+  return await revenueRepository.getByData(data);
 }
