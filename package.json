@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
-    "start": "npm build && ts -node src/server.js",
+    "build": "npx tsc",
+    "start": "npm build && node dist/src/server.js",
     "dev": "nodemon src/index.ts",
     "test": "jest --no-cache"
   },
