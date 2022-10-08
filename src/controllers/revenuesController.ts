@@ -34,3 +34,8 @@ export async function create(req: Request, res: Response){
   res.status(201).send("Cadastrou!")
 }
 
+export async function getSearch(req: Request, res: Response){
+  const { name } = req.params;
+  const result = await revenueService.searchList(name);
+  res.send(result)
+}

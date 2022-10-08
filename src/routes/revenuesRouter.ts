@@ -6,6 +6,7 @@ import {
   getMyRevenues,
   getById,
   create,
+  getSearch,
 } from "../controllers/revenuesController.js";
 import { authMiddleware } from "../middleware/authMiddleware.js";
 import { schemaValidate } from "../middleware/shemaValidate.js";
@@ -18,6 +19,7 @@ revenueRouter.get("/category/:id", getRevenuesByCategoryId);
 revenueRouter.get("/revenues/favorites", authMiddleware, getFavorites);
 revenueRouter.get("/revenues/personal", authMiddleware, getMyRevenues);
 revenueRouter.get("/revenue/:revenueId", getById);
+revenueRouter.get("/search/:name", getSearch);
 revenueRouter.post(
   "/revenue/insert",
   authMiddleware,

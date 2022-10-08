@@ -41,3 +41,7 @@ export async function create(data: Revenue) {
 export async function getRevenues(data: Partial<Revenue>) {
   return await revenueRepository.getByData(data);
 }
+
+export async function searchList(name: string){
+  return await revenueRepository.searchList(name);
+}

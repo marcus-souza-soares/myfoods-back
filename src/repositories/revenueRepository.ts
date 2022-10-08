@@ -45,3 +45,18 @@ export async function create(data: Omit<Revenue, "id">) {
     data,
   });
 }
+
+export async function searchList(name: string) {
+  return await prisma.revenues.findMany({
+    where: {
+      nome: {
+        contains: name,
+        mode: "insensitive",
+      },
+    },
+    take: 5,
+    orderBy: {
+      nome: "asc",
+    },
+  });
+}
