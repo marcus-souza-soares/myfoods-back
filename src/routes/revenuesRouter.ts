@@ -7,6 +7,7 @@ import {
   getById,
   create,
   getSearch,
+  deleteRevenue
 } from "../controllers/revenuesController.js";
 import { authMiddleware } from "../middleware/authMiddleware.js";
 import { schemaValidate } from "../middleware/shemaValidate.js";
@@ -26,5 +27,6 @@ revenueRouter.post(
   schemaValidate(revenueSchema),
   create
 );
+revenueRouter.delete("/revenue/delete/:id", authMiddleware, deleteRevenue);
 
 export default revenueRouter;

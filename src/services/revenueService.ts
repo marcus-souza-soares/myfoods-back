@@ -35,13 +35,18 @@ export async function getById(revenueId: string) {
 }
 export async function create(data: Revenue) {
   const find = await getRevenues(data);
-  if(!!find) throw {code: "NotAllowed", message: "Receita já cadastrada!"}
+  if (!!find) throw { code: "NotAllowed", message: "Receita já cadastrada!" };
   return await revenueRepository.create(data);
 }
 export async function getRevenues(data: Partial<Revenue>) {
   return await revenueRepository.getByData(data);
 }
 
-export async function searchList(name: string){
+export async function searchList(name: string) {
   return await revenueRepository.searchList(name);
+}
+export async function deleteRevenue(id: string) {
+  const find = revenueRepository.findById(id);
+  if (!find) throw { code: "NotFound", message: "Essa receita não existe!" };
+  return await revenueRepository.deleteRevenueById(id);
 }

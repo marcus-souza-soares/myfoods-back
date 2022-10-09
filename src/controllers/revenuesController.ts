@@ -39,3 +39,8 @@ export async function getSearch(req: Request, res: Response){
   const result = await revenueService.searchList(name);
   res.send(result)
 }
+export async function deleteRevenue(req: Request, res: Response){
+  const { id } = req.params;
+  await revenueService.deleteRevenue(id);
+  res.send("ok");
+}

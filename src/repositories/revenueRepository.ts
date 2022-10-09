@@ -29,7 +29,7 @@ export async function getMyRevenues(userId: string) {
   });
 }
 export async function findById(id: string) {
-  return await prisma.revenues.findUnique({
+  return await prisma.revenues.findFirst({
     where: {
       id,
     },
@@ -57,6 +57,14 @@ export async function searchList(name: string) {
     take: 5,
     orderBy: {
       nome: "asc",
+    },
+  });
+}
+
+export async function deleteRevenueById(id: string) {
+  return await prisma.revenues.delete({
+    where: {
+      id,
     },
   });
 }
