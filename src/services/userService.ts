@@ -1,4 +1,4 @@
-import { Register, Login } from "../types/userTypes";
+import { Register, User, Login } from "../types/userTypes";
 import * as userRepository from "../repositories/userRepository.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -34,7 +34,7 @@ export async function getUserById(id: string) {
   return await userRepository.findUserById(id);
 }
 
-function encriptPassword(pass: string) {
+export function encriptPassword(pass: string) {
   const crypted_password = bcrypt.hashSync(pass, 6);
   return crypted_password;
 }
@@ -42,7 +42,7 @@ function comparePassword(pass: string, userPass: string) {
   return bcrypt.compareSync(pass, userPass);
 }
 
-function buildToken(user: Login) {
+export function buildToken(user: User) {
   const jwtKey = process.env.JWT_SECRET;
   const config = { expiresIn: process.env.EXPIRES_TOKEN || "1h" };
   try {

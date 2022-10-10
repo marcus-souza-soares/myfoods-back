@@ -46,8 +46,3 @@ model favorites {
   revenueId String   @db.ObjectId
   revenues  revenues @relation(fields: [revenueId], references: [id])
 }
-
-model teste {
-  id   String @id @default(auto()) @map("_id") @db.ObjectId
-  name String
-}

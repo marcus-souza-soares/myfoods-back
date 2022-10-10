@@ -31,7 +31,7 @@ export async function getById(req: Request, res: Response) {
 export async function create(req: Request, res: Response){
   const data = req.body;
   await revenueService.create(data);
-  res.status(201).send("Cadastrou!")
+  return res.status(201).send("Cadastrou!")
 }
 
 export async function getSearch(req: Request, res: Response){
