@@ -45,8 +45,10 @@ export async function getRevenues(data: Partial<Revenue>) {
 export async function searchList(name: string) {
   return await revenueRepository.searchList(name);
 }
-export async function deleteRevenue(id: string) {
-  const find = revenueRepository.findById(id);
+export async function deleteRevenue(revenueId: string, userId: string) {
+  const find = revenueRepository.findById(revenueId);
   if (!find) throw { code: "NotFound", message: "Essa receita não existe!" };
-  return await revenueRepository.deleteRevenueById(id);
+  const favorite = await favoriteService.getFavorite({ revenueId, userId });
+  if (!!favorite) await favoriteService.removeFavorite({ revenueId, userId });
+  return await revenueRepository.deleteRevenueById(revenueId);
 }

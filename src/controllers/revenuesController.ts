@@ -41,6 +41,7 @@ export async function getSearch(req: Request, res: Response){
 }
 export async function deleteRevenue(req: Request, res: Response){
   const { id } = req.params;
-  await revenueService.deleteRevenue(id);
+  const user = res.locals.user;
+  await revenueService.deleteRevenue(id, user.id);
   res.send("ok");
 }
